@@ -1,0 +1,42 @@
+<div class="container">
+  <h1>{{ isEdit ? "Editar" : "Adicionar" }} Pedido</h1>
+  <form [formGroup]="orderForm" (ngSubmit)="saveOrder()">
+    <div>
+      <label for="customerName">Nome do Cliente</label>
+      <input id="customerName" formControlName="customerName" />
+    </div>
+    <div>
+      <label for="customerEmail">Email do Cliente</label>
+      <input id="customerEmail" formControlName="customerEmail" />
+    </div>
+
+    <div>
+      <label for="paid">Pago</label>
+      <input id="paid" type="checkbox" formControlName="paid" />
+    </div>
+
+    <div formArrayName="orderItems">
+      <div
+        *ngFor="let item of orderItems.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <div>
+          <label for="productId">Produto</label>
+          <select id="productId" formControlName="productId">
+            <option *ngFor="let product of products" [value]="product.id">
+              {{ product.productName }}
+            </option>
+          </select>
+        </div>
+        <div>
+          <label for="quantity">Quantidade</label>
+          <input id="quantity" type="number" formControlName="quantity" />
+        </div>
+        <button type="button" (click)="removeItem(i)">Remover</button>
+      </div>
+    </div>
+    <button type="button" (click)="addItem()">Adicionar Item</button>
+    <button type="button" (click)="saveOrder()">Salvar</button>
+    <button type="button" (click)="cancel()">Cancelar</button>
+  </form>
+</div>

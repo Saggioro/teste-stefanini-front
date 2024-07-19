@@ -1,0 +1,38 @@
+<div class="container">
+  <h1>Orders</h1>
+  <button (click)="navigateToAddOrder()" class="btn btn-primary">
+    Adicionar Pedido
+  </button>
+  <table class="table table-striped mt-3">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome do Cliente</th>
+        <th>Email do Cliente</th>
+        <th>Data de Criação</th>
+        <th>Pago</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order.id }}</td>
+        <td>{{ order.customerName }}</td>
+        <td>{{ order.customerEmail }}</td>
+        <td>{{ order.creationDate | date }}</td>
+        <td>{{ order.paid ? "Sim" : "Não" }}</td>
+        <td>
+          <button
+            (click)="navigateToEditOrder(order.id)"
+            class="btn btn-secondary"
+          >
+            Editar
+          </button>
+          <button (click)="deleteOrder(order.id)" class="btn btn-danger">
+            Deletar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

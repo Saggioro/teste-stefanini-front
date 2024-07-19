@@ -1,0 +1,34 @@
+<div class="container">
+  <h1>Lista de Produtos</h1>
+  <button (click)="navigateToAddProduct()" class="btn btn-primary">
+    Adicionar Produto
+  </button>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome do Produto</th>
+        <th>Preço</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.id }}</td>
+        <td>{{ product.productName }}</td>
+        <td>{{ product.price | currency }}</td>
+        <td>
+          <button
+            (click)="navigateToEditProduct(product.id)"
+            class="btn btn-secondary"
+          >
+            Editar
+          </button>
+          <button (click)="deleteProduct(product.id)" class="btn btn-danger">
+            Deletar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
